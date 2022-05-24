@@ -10,7 +10,32 @@ copy server certificats to /etc/simplifier/traefik
 copy security.toml to /etc/simplifier/traefik
 edit security.toml to match your needs, at least change name of certificate files
 
-### Installation Manual
+## Environment Variables
+### SIMPLIFIER_HOSTNAME
+Insert a valid dns name for example 'example.simplifier.cloud'.
+
+> :warning: Use a valid dns name for the Variable HOSTNAME - IP Adresses won't work for HOSTNAME because Traefik don't like this.
+> If you are not capable to generate a valid dns with certificate, just modify your host file (for e.g. /etc/hosts) and flush your dns cache
+
+### DB_PASSWORD
+Password of the database user 'simplifier'
+
+### DB_NAME
+Name of the database schema. Should be 'appserver', leave it as is.
+
+### DB_ROOT_PASSWORD
+Root password of the root user. Should be 'root' by default, unless you have changed it manually.
+
+### SIMPLIFIER_VERSION
+Define the Simplifier runtime version. 
+
+### SIMPLIFIER_DATA_VOL
+Define the data directory for simplifier. Default is '/opt/simplifier/data', unless you have changed it. 
+
+> :warning: We assume that you have mounted the database storage directory under '${SIMPLIFIER_DATA_VOL}/mysql'. If that is not the case
+> please reach out to us.
+
+## Installation Manual
 
 1. Clone Branch 'update-onpremise-image'
 
@@ -20,15 +45,8 @@ Prepare Directories for Docker Volumes on your host
 
 2. Modify Variables in .env File
 
-Adjust Hostname and if needed Simplifier Version, leave other variables at their default, unless you have manually changed something
-
-```
-HOSTNAME=example.simplifier.cloud
-SIMPLIFIER_VERSION=6.5 
-```
-
-> :warning: Use a valid dns name for the Variable HOSTNAME - IP Adresses won't work for HOSTNAME because Traefik don't like this.
-> If you are not capable to generate a valid dns with certificate, just modify your host file (for e.g. /etc/hosts) and flush your dns cache
+Adjust Hostname and if needed Simplifier Version, leave other variables at their default, unless you have manually changed something. 
+*See section "Environment Variables"*
 
 3. Create Certificate Volume for TLS Certfificates
 
