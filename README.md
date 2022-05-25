@@ -66,6 +66,8 @@ copy and edit security configuration
 
 Press Strg+X if no error occurs in the logs
 
+> :warning: If there is a container name conflict, resolve it by using `docker container rename simplifier simplifier_onpremise` and start docker-compose again.
+
 6. Open Hostname with your Browser
 
 https://yourHostname/UserInterface
