@@ -84,3 +84,10 @@ https://yourHostname/UserInterface
 10. Register on our [Community Page](https://community.simplifier.io/)
 
 and learn how to use Simpifier in our [free online courses](https://community.simplifier.io/courses/)!
+
+## Plugins
+
+After this update, the db user 'simplifier' does not have privileges to access plugin database schemas. If you are using a plugin which needs a database, you have to grant privileges to 'simplifier'.
+```
+echo "GRANT ALL ON \`appserver_content\`.* TO 'simplifier'@'%' ;" | mysql -u root -proot &> /dev/null
+```
