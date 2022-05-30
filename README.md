@@ -64,9 +64,12 @@ copy and edit security configuration
 
 `docker-compose -f simplifier-standalone.yml up -d && docker-compose -f simplifier-standalone.yml logs -f`
 
-Press Strg+X if no error occurs in the logs
+Press Strg+C if no error occurs in the logs
 
 > :warning: If there is a container name conflict, resolve it by using `docker container rename simplifier simplifier_onpremise` and start docker-compose again.
+
+
+> :warning: If you are using the content repo plugin via database, you have to grant privileges to simplifier database user. See next section how to do this.
 
 6. Open Hostname with your Browser
 
@@ -84,3 +87,21 @@ https://yourHostname/UserInterface
 10. Register on our [Community Page](https://community.simplifier.io/)
 
 and learn how to use Simpifier in our [free online courses](https://community.simplifier.io/courses/)!
+
+## Grant Privileges to Content-Repo-Database
+
+After starting the database and appserver via docker-compose, you have to execute a command to grant privileges, so that the 'simplifier' database user has access to the content-repo-database.
+Execute the following command to connect to the docker container:
+
+```docker exec -it mysql /bin/bash```
+
+Now, execute this command, to grant privileges to simplifier user:
+
+```echo "GRANT ALL ON \`appserver_content\`.* TO 'simplifier'@'%' ;" | /usr/bin/mysql -uroot -proot```
+
+Restart all docker containers:
+
+```
+docker-compose -f simplifier-standalone.yml down
+docker-compose -f simplifier-standalone.yml up -d && docker-compose -f simplifier-standalone.yml logs -f
+```
