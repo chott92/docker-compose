@@ -20,9 +20,10 @@ mkdir -p /etc/simplifier/traefik
 
 ### Installation Manual
 
-1. Clone Repository
+1. Clone Repository and checkout the right branch
 
 `git clone https://github.com/simplifier-ag/docker-compose.git`
+`git checkout --track origin/release/7.0 `
 
 Prepare Directories for Docker Volumes on your host
 
