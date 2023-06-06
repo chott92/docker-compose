@@ -22,7 +22,7 @@ services:
       - internal-network
 
   mysqlinit:
-    image: itizzimo/simplifier_mysqlinit:0.1.0
+    image: simplifierag/mysqlinit:0.1.0
     container_name: mysqlinit
     volumes:
       - ./mysql:/config
