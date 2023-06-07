@@ -22,12 +22,14 @@ services:
       - internal-network
 
   mysqlinit:
-    image: simplifierag/mysqlinit:0.1.0
+    image: simplifierag/mysqlinit:0.2.0
     container_name: mysqlinit
     volumes:
       - ./mysql:/config
     restart: on-failure:255
     command: [ "/runtime/mysqlinit", "-config", "/config/config.yaml", "-user", "root", "-pass", "${DB_ROOT_PASSWORD}", "-endpoint", "mysql:3306" ]
+    environment:
+      - DB_PREFIX=${DB_NAME}
     depends_on:
         mysql:
           condition: service_healthy
